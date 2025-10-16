@@ -21,7 +21,7 @@
     --lightbox-font-color: #e5e5e5;
     --lightbox-border-color: black;
     --lightbox-border-width: 0.5rem;
-    --lightbox-caption-background: rgba(0, 0, 0, 0.3);
+    --lightbox-caption-background: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
     left: 0;
