@@ -67,7 +67,8 @@
             const gallery = document.getElementById('gallery');
             // Initialize ImageWall with LightBox
             if (gallery) {
-                window.imageWall = new ImageWall(gallery, { rowHeight: 180, gap: 6, debug: true });
+                // use buttonCaptions to customize the captions for the lightbox buttons (multi-lingual sites)
+                window.imageWall = new ImageWall(gallery, { rowHeight: 180, gap: 6, buttonCaptions: { prev: "Previous", next: "Next", close: "Close" }, debug: true });
             } else {
                 console.error("Gallery element not found");
             }

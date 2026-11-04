@@ -41,6 +41,11 @@ import { LightBox } from "./lightbox";
  * @property enableLightbox - When true, clicking an image triggers a lightbox /
  * modal viewer (implementation-dependent). Disable if you plan to handle clicks
  * externally. (Default: true)
+ * 
+ * @property buttonCaptions - Optional captions for the lightbox buttons.
+ * prev: caption for the "previous" button (default: "Previous")
+ * next: caption for the "next" button (default: "Next")
+ * close: caption for the "close" button (default: "Close")
  *
  * @property debounceMs - Milliseconds to debounce resize / container dimension
  * recalculations. Tune higher for performance on rapid resize; lower for more
@@ -57,6 +62,11 @@ export interface ImageWallOptions {
     gap?: number;       // gap between images in px (horizontal & vertical)
     lastRowAlign?: 'left' | 'center' | 'justify' | 'right'; // how to treat the last row if not full
     enableLightbox?: boolean; // enable lightbox on click
+    buttonCaptions?: { // optional captions for lightbox buttons
+        prev?: string;
+        next?: string;
+        close?: string;
+    };
     debounceMs?: number; // resize debounce
     debug?: boolean;     // enable debug logging
 }
@@ -173,6 +183,7 @@ export class ImageWall extends EventTarget {
             gap: options.gap ?? 6,
             lastRowAlign: options.lastRowAlign ?? 'center',
             enableLightbox: options.enableLightbox ?? true,
+            buttonCaptions: options.buttonCaptions ?? {},
             debounceMs: options.debounceMs ?? 120,
             debug: options.debug ?? false,
         };
@@ -196,7 +207,7 @@ export class ImageWall extends EventTarget {
 
         // LightBox on click
         if (this.opts.enableLightbox)
-            this.lightbox = new LightBox({ container: this.container, images: this.images, debug: this.opts.debug });
+            this.lightbox = new LightBox({ container: this.container, images: this.images, buttonCaptions: this.opts.buttonCaptions, debug: this.opts.debug });
     }
 
     /** Public: recompute layout (useful if DOM changed) */

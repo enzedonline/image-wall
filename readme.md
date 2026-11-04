@@ -201,6 +201,11 @@ The options have the following type, exposed in `ImageWallOptions`:
     gap?: number;       // gap between images in px (horizontal & vertical)
     lastRowAlign?: 'left' | 'center' | 'justify' | 'right'; // how to treat the last row if not full
     enableLightbox?: boolean; // enable lightbox on click
+    buttonCaptions?: { // optional ARIA labels for lightbox buttons
+      prev?: string;  // default "Previous"
+      next?: string;  // default "Next"
+      close?: string; // default "Close"
+    };
     debounceMs?: number; // resize debounce
     debug?: boolean;     // enable debug logging
 ```
@@ -211,6 +216,7 @@ For example, to create an image wall with target height 180px, gap 6px and with 
 ```ts
 new ImageWall(container, { rowHeight: 180, gap: 6, enableLightbox: false });
 ```
+Use `buttonCaptions` to override lightbox button ARIA labels with active language replacements.
 
 `debug` will output messages to the debug console to help any troubleshooting. It should be set to `false` for production.
 
