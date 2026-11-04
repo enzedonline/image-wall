@@ -26,6 +26,11 @@
 export interface LightboxOptions {
     container: HTMLElement;
     images?: HTMLElement[]; // wrappers (picture or img) that have data-src and optional data-caption
+    buttonCaptions?: {
+        prev?: string;
+        next?: string;
+        close?: string;
+    };
     debug?: boolean;
 }
 
@@ -198,14 +203,16 @@ export class LightBox {
         this.prevBtn = document.createElement('button');
         this.prevBtn.type = 'button';
         this.prevBtn.className = 'lightbox-prev';
-
+        this.prevBtn.ariaLabel = options.buttonCaptions?.prev || 'Previous';
         this.nextBtn = document.createElement('button');
         this.nextBtn.type = 'button';
         this.nextBtn.className = 'lightbox-next';
+        this.nextBtn.ariaLabel = options.buttonCaptions?.next || 'Next';
 
         this.closeBtn = document.createElement('button');
         this.closeBtn.type = 'button';
         this.closeBtn.className = 'lightbox-close';
+        this.closeBtn.ariaLabel = options.buttonCaptions?.close || 'Close';
 
         // Append in order: two image layers, caption, controls
         this.inner.append(imgA, imgB, this.captionEl, this.prevBtn, this.nextBtn, this.closeBtn, spinner);
